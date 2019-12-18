@@ -22,6 +22,7 @@ A 3D globe is in the middle of a room. The goal is to shoot the moon in the righ
 1%
 
 ## Visuals
+<img src="Pictures/RotatedFirstMockup.jpeg" width="500" style="display: none;">
 
 ## Lessons Learned
 
