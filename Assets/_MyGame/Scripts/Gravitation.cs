@@ -3,18 +3,24 @@
 public class Gravitation : MonoBehaviour
 {
     [SerializeField]
-    private Transform earth;
+    private Transform earth = null;
     [SerializeField]
-    private Transform moon;
+    private Transform moon = null;
 
     private Rigidbody rbEarth;
     private Rigidbody rbMoon;
+    private int factor = 1;
 
     private const float GRAVITATION = 9.81f;
 
     private float AttractionForce (float mass1, float mass2, float distance)
     {
-        return mass1 * mass2 / distance * GRAVITATION;
+        return mass1 * mass2 / distance * GRAVITATION * factor;
+    }
+
+    public void EarthAttract(bool mode)
+    {
+        factor = mode ? 1 : 0;
     }
 
     private void Start()
