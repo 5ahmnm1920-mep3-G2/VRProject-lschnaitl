@@ -3,7 +3,7 @@
 public class ShootPlanet : MonoBehaviour
 {
     [SerializeField] private Transform planet = null;
-    [SerializeField] private Gravitation gravitation;
+    [SerializeField] private Gravitation gravitation = null;
     [SerializeField] private float factorIncreace = 0.2f;
 
     private Rigidbody planetRb;
