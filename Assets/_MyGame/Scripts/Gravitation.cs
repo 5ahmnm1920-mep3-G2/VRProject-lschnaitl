@@ -31,8 +31,11 @@ public class Gravitation : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // get directions vector3 toward earth and distance
         Vector3 direction = (earth.position - moon.position).normalized;
         float distance = Vector3.Distance(earth.position, moon.position);
+
+        // apply the gravitation to the moon
         rbMoon.AddForce(direction * AttractionForce(rbEarth.mass, rbMoon.mass, distance));
     }
 }

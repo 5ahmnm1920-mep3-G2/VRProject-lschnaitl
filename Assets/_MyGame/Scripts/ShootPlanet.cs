@@ -25,7 +25,7 @@ public class ShootPlanet : MonoBehaviour
 
         if (Input.GetKey(actionKey) && isReset)
         {
-            forceFactor += factorIncreace * Time.deltaTime;
+            forceFactor *= factorIncreace * Time.deltaTime;
             Debug.Log(forceFactor);
         }
         else if (Input.GetKeyUp(actionKey))
@@ -36,10 +36,15 @@ public class ShootPlanet : MonoBehaviour
     
     private void ResetPlanetPosition()
     {
+        // disable gravity of earth
         gravitation.EarthAttract(false);
+
+        // set the planets position and rotation to the guns
         planet.position = transform.position;
         planet.rotation = transform.rotation;
         planet.parent = transform;
+
+        // reset its velocity and the force factor
         planetRb.velocity = Vector3.zero;
         isReset = true;
         forceFactor = 0;
@@ -47,9 +52,14 @@ public class ShootPlanet : MonoBehaviour
 
     private void Shoot(float zForce)
     {
+        // release planet from gun
         planet.parent = null;
+
+        // enable gravity
         gravitation.EarthAttract(true);
-        isReset = false;
+
+        // shoot the planet
         planetRb.AddForce(transform.forward.normalized * zForce);
+        isReset = false;
     }
 }
