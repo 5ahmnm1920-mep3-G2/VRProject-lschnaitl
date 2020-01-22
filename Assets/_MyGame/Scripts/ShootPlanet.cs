@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
+using TMPro;
 
 public class ShootPlanet : MonoBehaviour
 {
     [SerializeField] private Transform planet = null;
     [SerializeField] private Gravitation gravitation = null;
     [SerializeField] private float factorIncreace = 0.2f;
-    [SerializeField] private float forceMin = 500;
     [SerializeField] private float forceMax = 5000;
+    [SerializeField] private TMP_Text forceText;
 
     private Rigidbody planetRb;
     private bool isReset;
     private readonly KeyCode actionKey = KeyCode.Space;
-    private float forceFactor = 1f;
+    private float force = 1f;
 
     private void Awake()
     {
@@ -21,6 +22,8 @@ public class ShootPlanet : MonoBehaviour
 
     private void Update()
     {
+        forceText.text = force.ToString("F");
+
         if (Input.GetKeyDown(actionKey) && !isReset)
         {
             ResetPlanetPosition();
@@ -28,12 +31,12 @@ public class ShootPlanet : MonoBehaviour
 
         if (Input.GetKey(actionKey) && isReset)
         {
-            forceFactor *= factorIncreace;
-            Debug.Log(forceFactor);
+            force *= factorIncreace;
+            Debug.Log(force);
         }
         else if (Input.GetKeyUp(actionKey))
         {
-            Shoot(forceFactor);
+            Shoot(force);
         }
     }
     
@@ -43,27 +46,27 @@ public class ShootPlanet : MonoBehaviour
         gravitation.EarthAttract(false);
 
         // set the planets position and rotation to the guns
-        planet.position = transform.position;
-        planet.rotation = transform.rotation;
         planet.parent = transform;
+        planet.localPosition = Vector3.zero;
+        planet.localRotation = Quaternion.identity;
 
         // reset its velocity and the force factor
         planetRb.velocity = Vector3.zero;
         isReset = true;
-        forceFactor = 1;
+        force = 1;
     }
 
     private void Shoot(float zForce)
     {
-        // release planet from gun
+        // unparent planet
         planet.parent = null;
 
         // enable gravity
         gravitation.EarthAttract(true);
 
-        // clamp the force
-        Mathf.Clamp(zForce, forceMin, forceMax);
-
+        // set min and max force
+        zForce = zForce > forceMax ? forceMax : zForce;
+        
         // shoot the planet
         planetRb.AddForce(transform.forward.normalized * zForce);
         Debug.Log("Shot with " + zForce + " Force!");
