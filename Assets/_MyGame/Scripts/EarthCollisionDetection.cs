@@ -15,7 +15,7 @@ public class EarthCollisionDetection : MonoBehaviour
     {
         if (collision.collider.CompareTag(PLANET_TAG))
         {
-            
+            sp.ResetPlanetPosition();
         }
     }
 }

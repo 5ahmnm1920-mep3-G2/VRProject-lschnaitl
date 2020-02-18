@@ -40,7 +40,7 @@ public class ShootPlanet : MonoBehaviour
         }
     }
     
-    private void ResetPlanetPosition()
+    public void ResetPlanetPosition()
     {
         // disable gravity of earth
         gravitation.EarthAttract(false);
