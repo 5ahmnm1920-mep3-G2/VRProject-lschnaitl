@@ -1,5 +1,7 @@
 # VR Project for Oculus Rift
 
+### [Dokumentation]("Pictures/Dokumentation.pdf")
+
 ## Concept
 A 3D globe is in the middle of a room. The goal is to shoot the moon in the right speed and from the right location to make it orbit around the globe correctly.  
   
@@ -31,5 +33,8 @@ A 3D globe is in the middle of a room. The goal is to shoot the moon in the righ
 ## Necessary setup/execution steps
 
 ## Third party material
+### Unity Asset Store
++ Planet Earth Free
++ MilkyWay (Skybox)
 
 **Copyright by Leonhard Schnaitl**
